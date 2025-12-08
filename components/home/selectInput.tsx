@@ -20,10 +20,10 @@ type SelectInputProps = {
 const SelectInput = ({ items, placeholder, setValue }: SelectInputProps) => {
   return (
     <Select onValueChange={(value) => setValue(value)}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px] border-blue-400">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="border-blue-400">
         {items.map((item, i) => (
           <SelectItem value={item.value} key={i}>
             {item.key}

@@ -5,27 +5,33 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
 import InputSearch from "./inputSearch";
 import SelectInput from "./selectInput";
-import { Value } from "@radix-ui/react-select";
+import { useDebounce } from "use-debounce";
+import PaginationbButton from "./paginationbButton";
+import SkeletonCard from "../common/skeletonCard";
 
 const CharacterContainer = () => {
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [name, setName] = useState("");
+  const [debounceName] = useDebounce(name, 500);
   const [status, setStatus] = useState("");
   const [gender, setGender] = useState("");
   const { data, isLoading } = useQuery({
-    queryKey: ["/characters", page, name, status],
+    queryKey: ["/characters", page, debounceName, status, gender],
     queryFn: async () => {
       const res = await axiosInstance.get("/character", {
         params: {
           page,
-          name,
+          name: debounceName,
           gender,
           status,
         },
       });
+      setTotalPages(res.data.info.pages);
       return res.data.results;
     },
   });
+
   const statusInput = [
     { key: "all", value: " " },
     { key: "dead", value: "dead" },
@@ -41,9 +47,10 @@ const CharacterContainer = () => {
   ];
   return (
     <div className="mt-4 md:mt-8">
-      <div className="mb-4 md:mb-8">
+      {isLoading && <SkeletonCard />}
+      <div className="mb-4 md:mb-8 flex flex-col gap-2 md:flex-row">
         <InputSearch name={name} setName={setName} />
-        <div>
+        <div className="flex items-center gap-1">
           <SelectInput
             placeholder="status"
             setValue={setStatus}
@@ -67,6 +74,13 @@ const CharacterContainer = () => {
             status={dat.status}
           />
         ))}
+      </div>
+      <div>
+        <PaginationbButton
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { Badge } from "../ui/badge";
+import { useRouter } from "next/navigation";
 
 type CharacterCardProps = {
   id: number;
@@ -18,8 +19,13 @@ const CharacterCard = ({
 }: CharacterCardProps) => {
   const statusVariant: "Alive" | "Dead" | "unknown" =
     status === "Alive" ? "Alive" : status === "Dead" ? "Dead" : "unknown";
+
+  const router = useRouter();
   return (
-    <div className="mx-auto border border-blue-400 rounded-lg w-full relative">
+    <div
+      className="mx-auto border  rounded-lg w-full relative shadow-lg cursor-pointer hover:scale-105 transition-all duration-300"
+      onClick={() => router.push(`/detail/${id}`)}
+    >
       <img
         src={image}
         alt="img"
@@ -28,7 +34,7 @@ const CharacterCard = ({
       <Badge className={`absolute top-1 left-1`} variant={statusVariant}>
         {status}
       </Badge>
-      <div className="p-3 flex flex-col gap-2 md:gap-4">
+      <div className="p-3 flex flex-col gap-2 md:gap-4 bg-white rounded-b-lg">
         <h2 className="font-bold font-rickAndMorty tracking-wider md:text-lg">
           {name}
         </h2>
