@@ -33,7 +33,7 @@ const DetailCard = ({
         alt="image"
         className="w-full rounded-t-lg h-80 md:rounded-l-lg md:rounded-t-none object-cover md:w-[40%] md:h-full "
       />
-      <div className="p-3 bg-white flex flex-col gap-3 rounded-b-lg md:justify-between md:rounded-r-lg md:rounded-t-none w-full ">
+      <div className="p-3 bg-white flex flex-col gap-3 rounded-b-lg md:justify-between md:rounded-r-lg md:rounded-b-none w-full ">
         <div className=" pb-1">
           <p>Name:</p>
           <p className="font-bold text-lg tracking-wide font-rickAndMorty md:text-2xl">

@@ -30,6 +30,7 @@ const CharacterContainer = () => {
       setTotalPages(res.data.info.pages);
       return res.data.results;
     },
+    retry: false,
   });
 
   const statusInput = [
@@ -47,7 +48,6 @@ const CharacterContainer = () => {
   ];
   return (
     <div className="mt-4 md:mt-8">
-      {isLoading && <SkeletonCard />}
       <div className="mb-4 md:mb-8 flex flex-col gap-2 md:flex-row">
         <InputSearch name={name} setName={setName} />
         <div className="flex items-center gap-1">
@@ -63,6 +63,8 @@ const CharacterContainer = () => {
           />
         </div>
       </div>
+      {isLoading && <SkeletonCard />}
+
       <div className="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-4">
         {data?.map((dat: any) => (
           <CharacterCard
