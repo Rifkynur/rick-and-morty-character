@@ -4,6 +4,8 @@ import "./globals.css";
 import { Providers } from "@/lib/appProviders";
 import Container from "@/components/common/Container";
 import Navbar from "@/components/common/navbar";
+import { Toaster } from "@/components/ui/sonner";
+import ThemeProvider from "@/lib/themeProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -23,11 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased bg-[#eeedef]`}>
-        <Navbar />
-        <Container>
-          <Providers>{children}</Providers>
-        </Container>
+      <body
+        className={`${poppins.variable} antialiased bg-[#ededed] dark:bg-[#272b33] `}
+      >
+        <ThemeProvider>
+          <Navbar />
+          <Toaster />
+          <Container>
+            <Providers>{children}</Providers>
+          </Container>
+        </ThemeProvider>
       </body>
     </html>
   );

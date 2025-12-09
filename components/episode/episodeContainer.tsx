@@ -7,13 +7,18 @@ import { useDebounce } from "use-debounce";
 import { axiosInstance } from "@/lib/axios";
 import SkeletonCard from "../common/skeletonCard";
 import InputSearch from "../home/inputSearch";
+import Empty from "../common/empty";
 
 const EpisodeContainer = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [name, setName] = useState("");
   const [debounceName] = useDebounce(name, 500);
-  const { data: episodes, isLoading } = useQuery({
+  const {
+    data: episodes,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["/episodes", page, debounceName],
     queryFn: async () => {
       const res = await axiosInstance.get("/episode", {
@@ -35,6 +40,8 @@ const EpisodeContainer = () => {
       </div>
       {isLoading ? (
         <SkeletonCard />
+      ) : isError ? (
+        <Empty msg="Episode Not Found" />
       ) : (
         <>
           <div className="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-4">

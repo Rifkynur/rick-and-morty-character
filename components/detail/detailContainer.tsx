@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
 import DetailCard from "./detailCard";
@@ -41,7 +40,7 @@ const DetailContainer = () => {
           gender={character?.gender}
           id={character?.id}
           image={character?.image}
-          location={character?.location?.name}
+          location={character?.location}
           name={character?.name}
           status={character?.status}
           origin={character?.origin?.name}

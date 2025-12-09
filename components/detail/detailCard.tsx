@@ -4,6 +4,8 @@ import DetailCharacterEpisodeCard, {
 } from "./detailCharacterEpisodeCard";
 import { ScrollArea } from "../ui/scroll-area";
 import GoBackButton from "../common/goBackButton";
+import { useFavoriteStore } from "@/store/useFavoriteStore";
+import { useEffect } from "react";
 
 type DetailCardProps = {
   id: number;
@@ -13,7 +15,9 @@ type DetailCardProps = {
   status: string;
   species?: string;
   origin?: string;
-  location: string;
+  location: {
+    name: string;
+  };
   episodes?: DetailCharacterEpisodeCardProps[];
 };
 
@@ -28,6 +32,12 @@ const DetailCard = ({
   species,
   episodes,
 }: DetailCardProps) => {
+  const { addFavorite, isFavorite, removeFavorite, loadFavorites } =
+    useFavoriteStore();
+  const alreadyFavorite = isFavorite(id);
+  useEffect(() => {
+    loadFavorites();
+  }, []);
   return (
     <>
       <GoBackButton />
@@ -37,7 +47,7 @@ const DetailCard = ({
           alt="image"
           className="w-full rounded-t-lg h-80 md:rounded-l-lg md:rounded-t-none object-cover md:w-[40%] md:h-full "
         />
-        <div className="p-3 bg-white rounded-b-lg flex flex-col gap-4 md:gap-0 md:flex-row  md:rounded-r-lg md:rounded-b-none w-full ">
+        <div className="p-3 bg-white rounded-b-lg flex flex-col gap-4 md:gap-0 md:flex-row  md:rounded-r-lg md:rounded-b-none w-full dark:bg-[#3c3e44]">
           <div className="flex flex-col gap-3 md:justify-between md:gap-2 md:w-1/2">
             <h2 className="font-bold">Information : </h2>
             <div className=" pb-1">
@@ -69,12 +79,31 @@ const DetailCard = ({
             <div>
               <p>Location:</p>
               <p className="text-lg font-rickAndMorty md:text-lg">
-                {location ?? "-"}
+                {location.name ?? "-"}
               </p>
             </div>
             <div>
-              <button className="cursor-pointer bg-green-500 text-white font-bold text-sm rounded-lg px-4 py-2">
-                Add Favorit
+              <button
+                onClick={() => {
+                  if (alreadyFavorite) {
+                    removeFavorite(id);
+                  } else {
+                    addFavorite({
+                      id,
+                      name,
+                      image,
+                      status,
+                      location,
+                    });
+                  }
+                }}
+                className={`cursor-pointer font-bold text-sm rounded-lg px-4 py-2 ${
+                  alreadyFavorite
+                    ? "bg-red-500 text-white"
+                    : "bg-green-500 text-white"
+                }`}
+              >
+                {alreadyFavorite ? "Remove Favorite" : "Add Favorite"}
               </button>
             </div>
           </div>

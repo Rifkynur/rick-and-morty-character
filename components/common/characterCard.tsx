@@ -31,12 +31,12 @@ const CharacterCard = ({
       <img
         src={image}
         alt="img"
-        className="w-full h-96 rounded-t-lg md:h-64 object-cover"
+        className="w-full h-64 rounded-t-lg md:h-64 object-cover"
       />
       <Badge className={`absolute top-1 left-1`} variant={statusVariant}>
         {status}
       </Badge>
-      <div className="p-3 flex flex-col gap-2 md:gap-4 bg-white rounded-b-lg">
+      <div className="p-3 flex flex-col gap-2 md:gap-4 bg-white rounded-b-lg dark:bg-[#3c3e44]">
         <h2 className="font-bold font-rickAndMorty tracking-wider md:text-lg">
           {name}
         </h2>

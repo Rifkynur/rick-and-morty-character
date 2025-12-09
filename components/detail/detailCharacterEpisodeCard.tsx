@@ -24,8 +24,10 @@ const DetailCharacterEpisodeCard = ({
       <div className="flex flex-col gap-1">
         <h2 className="font-bold">{episode}</h2>
         <div>
-          <p className="text-sm text-black/70">{name}</p>
-          <span className="text-sm text-black/70">{air_date}</span>
+          <p className="text-sm text-black/70 dark:text-white/50">{name}</p>
+          <span className="text-sm text-black/70 dark:text-white/50">
+            {air_date}
+          </span>
         </div>
       </div>
       <ChevronRight />

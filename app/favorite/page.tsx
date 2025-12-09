@@ -1,7 +1,12 @@
 import React from "react";
+import FavoriteContainer from "@/components/favorite/favoriteContainer";
 
 const Page = () => {
-  return <div>Page</div>;
+  return (
+    <>
+      <FavoriteContainer />
+    </>
+  );
 };
 
 export default Page;

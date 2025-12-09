@@ -8,6 +8,7 @@ import SelectInput from "./selectInput";
 import { useDebounce } from "use-debounce";
 import PaginationbButton from "../common/paginationbButton";
 import SkeletonCard from "../common/skeletonCard";
+import Empty from "../common/empty";
 
 const CharacterContainer = () => {
   const [page, setPage] = useState(1);
@@ -16,7 +17,7 @@ const CharacterContainer = () => {
   const [debounceName] = useDebounce(name, 500);
   const [status, setStatus] = useState("");
   const [gender, setGender] = useState("");
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["/characters", page, debounceName, status, gender],
     queryFn: async () => {
       const res = await axiosInstance.get("/character", {
@@ -65,6 +66,8 @@ const CharacterContainer = () => {
       </div>
       {isLoading ? (
         <SkeletonCard />
+      ) : isError ? (
+        <Empty msg="Characters Not Found" />
       ) : (
         <>
           <div className="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-4">
@@ -79,13 +82,12 @@ const CharacterContainer = () => {
               />
             ))}
           </div>
-          <div>
-            <PaginationbButton
-              page={page}
-              setPage={setPage}
-              totalPages={totalPages}
-            />
-          </div>
+
+          <PaginationbButton
+            page={page}
+            setPage={setPage}
+            totalPages={totalPages}
+          />
         </>
       )}
     </div>
