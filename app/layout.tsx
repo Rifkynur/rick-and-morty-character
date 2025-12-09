@@ -30,14 +30,14 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} antialiased bg-[#ededed] dark:bg-[#272b33] `}
       >
-        <ThemeProvider>
-          <Navbar />
-          <Toaster />
-          <Container>
-            <Providers>{children}</Providers>
-          </Container>
-          <Footer />
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider>
+            <Navbar />
+            <Toaster />
+            <Container>{children}</Container>
+            <Footer />
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

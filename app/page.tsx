@@ -1,9 +1,10 @@
-import HomePages from "@/pages/homePages";
+import CharacterContainer from "@/components/home/characterContainer";
 
 export default function Home() {
   return (
     <div>
-      <HomePages />
+      <img src="/rickAndMorty.png" alt="logo" className="mx-auto" />
+      <CharacterContainer />
     </div>
   );
 }

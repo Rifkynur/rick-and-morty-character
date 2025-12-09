@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rick & Morty Explorer
 
-## Getting Started
+A simple and modern web application built with **Next.js**, **shadcn/ui**, **React Query**, **Zustand**, and **Tailwind CSS**.  
+This app allows users to browse characters, episodes, and mark favorite characters using local persistent storage.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Next.js 16** — App Router, Client Components
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui** — Reusable UI components
+- **React Query** — Server state management & data fetching
+- **Zustand** — Client state management (Favorites state)
+- **Axios** — HTTP client
+- **Lucide Icons**
+- **Use-debounce** — Search input debounce
+- **LocalStorage persist** — Save favorite characters
+
+---
+
+## 📂 Features
+
+### 🔍 Character Browser
+
+- Search characters by name
+- Filter by status (Alive, Dead, Unknown)
+- Filter by gender
+- Pagination support
+- Skeleton loading state
+
+### ⭐ Favorite Characters
+
+- Add/remove favorites
+- Persistent favorites using `localStorage`
+- Favorite list page
+
+### 📄 Character Detail Page
+
+- View character information (status, gender, species, origin, location)
+- Episode list with scroll area
+- Favorite toggle (red/green button)
+
+### 📺 Episode Detail Page
+
+- Episode info (episode code, air date)
+- List of cast characters
+
+### 🌓 Theme Ready (Light/Dark)
+
+- Tailwind + shadcn class-based theme support
+
+---
+
+## 🛠️ Installation
 
 ```bash
+git clone https://github.com/Rifkynur/rick-and-morty-character
+cd your-project
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will run on
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Script
 
-## Learn More
+- npm run dev # Start development server
+- npm run build # Build production
+- npm run start # Start production server
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build Time
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Total Time 14 hours
+- Setup 1 hours
+- UI 7 hours
+- API 6 hours
