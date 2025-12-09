@@ -6,6 +6,7 @@ import Container from "@/components/common/Container";
 import Navbar from "@/components/common/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import ThemeProvider from "@/lib/themeProvider";
+import Footer from "@/components/common/footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -34,6 +35,7 @@ export default function RootLayout({
           <Container>
             <Providers>{children}</Providers>
           </Container>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
