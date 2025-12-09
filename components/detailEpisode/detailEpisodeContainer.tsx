@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import CharacterCard, { CharacterCardProps } from "../common/characterCard";
 import SkeletonDetail from "../detail/SkeletonDetail";
+import SkeletonCard from "../common/skeletonCard";
 
 const DetailEpisodeContainer = () => {
   const params = useParams();
@@ -15,7 +16,7 @@ const DetailEpisodeContainer = () => {
       return res.data;
     },
   });
-  const { data: characters } = useQuery({
+  const { data: characters, isLoading: loadingCharacter } = useQuery({
     enabled: !!episode,
     queryKey: ["episode-characters", episode?.id],
     queryFn: async () => {
@@ -32,6 +33,8 @@ const DetailEpisodeContainer = () => {
       <GoBackButton />
       {isLoading ? (
         <SkeletonDetail />
+      ) : loadingCharacter ? (
+        <SkeletonCard />
       ) : (
         <>
           <div className="flex flex-col justify-center items-center gap-4">
