@@ -10,7 +10,7 @@ const DetailContainer = () => {
   const params = useParams();
 
   const { data: character, isLoading } = useQuery({
-    queryKey: ["character"],
+    queryKey: ["character", params?.id],
     queryFn: async () => {
       const res = await axiosInstance.get(`/character/${params?.id}`);
       return res.data;

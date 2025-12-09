@@ -1,7 +1,11 @@
 import React from "react";
-
+import EpisodeContainer from "@/components/episode/episodeContainer";
 const Page = () => {
-  return <div>Page</div>;
+  return (
+    <>
+      <EpisodeContainer />
+    </>
+  );
 };
 
 export default Page;

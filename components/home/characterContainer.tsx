@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import CharacterCard from "../common/characterCard";
+import CharacterCard, { CharacterCardProps } from "../common/characterCard";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
 import InputSearch from "./inputSearch";
 import SelectInput from "./selectInput";
 import { useDebounce } from "use-debounce";
-import PaginationbButton from "./paginationbButton";
+import PaginationbButton from "../common/paginationbButton";
 import SkeletonCard from "../common/skeletonCard";
 
 const CharacterContainer = () => {
@@ -68,13 +68,13 @@ const CharacterContainer = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-4">
-            {data?.map((dat: any) => (
+            {data?.map((dat: CharacterCardProps) => (
               <CharacterCard
                 key={dat.id}
                 id={dat.id}
                 name={dat.name}
                 image={dat.image}
-                location={dat.location.name}
+                location={dat.location}
                 status={dat.status}
               />
             ))}

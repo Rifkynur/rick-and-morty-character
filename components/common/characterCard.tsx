@@ -2,12 +2,14 @@ import React from "react";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
 
-type CharacterCardProps = {
+export type CharacterCardProps = {
   id: number;
   image: string;
   status: string;
   name: string;
-  location: string;
+  location: {
+    name: string;
+  };
 };
 
 const CharacterCard = ({
@@ -40,7 +42,7 @@ const CharacterCard = ({
         </h2>
         <div>
           <p className="text-sm">Latest location : </p>
-          <h3 className="font-medium md:text-lg">{location}</h3>
+          <h3 className="font-medium md:text-lg">{location.name}</h3>
         </div>
       </div>
     </div>

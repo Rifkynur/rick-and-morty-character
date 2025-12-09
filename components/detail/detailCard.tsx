@@ -1,11 +1,9 @@
 "use client";
-import React from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import DetailCharacterEpisodeCard from "./detailCharacterEpisodeCard";
+import DetailCharacterEpisodeCard, {
+  DetailCharacterEpisodeCardProps,
+} from "./detailCharacterEpisodeCard";
 import { ScrollArea } from "../ui/scroll-area";
-import { MoveLeft } from "lucide-react";
+import GoBackButton from "../common/goBackButton";
 
 type DetailCardProps = {
   id: number;
@@ -16,7 +14,7 @@ type DetailCardProps = {
   species?: string;
   origin?: string;
   location: string;
-  episodes?: any[];
+  episodes?: DetailCharacterEpisodeCardProps[];
 };
 
 const DetailCard = ({
@@ -30,16 +28,9 @@ const DetailCard = ({
   species,
   episodes,
 }: DetailCardProps) => {
-  const router = useRouter();
   return (
     <>
-      <div
-        className="flex items-center gap-3 mb-4 font-bold cursor-pointer"
-        onClick={() => router.back()}
-      >
-        <MoveLeft />
-        <p>Go Back</p>
-      </div>
+      <GoBackButton />
       <div className="border  rounded-lg flex flex-col md:flex-row shadow-lg md:h-[550px] lg:h-[500px]">
         <img
           src={image}
@@ -92,7 +83,7 @@ const DetailCard = ({
             <ScrollArea className="h-96 md:h-[calc(100%-30px)]">
               {episodes?.map((episode) => (
                 <DetailCharacterEpisodeCard
-                  airDate={episode?.air_date}
+                  air_date={episode?.air_date}
                   key={episode?.id}
                   episode={episode?.episode}
                   id={episode?.id}
