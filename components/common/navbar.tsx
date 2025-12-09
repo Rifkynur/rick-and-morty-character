@@ -11,13 +11,9 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-sm p-3 mx-auto ">
       <div className="max-w-7xl mx-auto w-full relative flex items-center justify-between   ">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full justify-between">
           <Link href={"/"}>
-            <img
-              src="/rick-icon.svg"
-              alt="icon"
-              className="size-10 md:size-14"
-            />
+            <img src="/logo.png" alt="icon" className="size-10 md:size-14 " />
           </Link>
           <ul className="hidden md:flex gap-4 items-center font-semibold text-lg">
             <li className={`${pathname == "/" && "text-orange-500"} `}>
@@ -28,6 +24,9 @@ const Navbar = () => {
             </li>
             <li className={`${pathname == "/episode" && "text-orange-500"} `}>
               <Link href={"/episode"}>Episode</Link>
+            </li>
+            <li>
+              <Moon className="size-6 cursor-pointer" />
             </li>
           </ul>
         </div>

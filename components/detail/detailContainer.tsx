@@ -4,30 +4,51 @@ import { useParams, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/lib/axios";
 import DetailCard from "./detailCard";
+import SkeletonDetail from "./SkeletonDetail";
 
 const DetailContainer = () => {
-  const { id } = useParams();
+  const params = useParams();
 
-  const { data } = useQuery({
+  const { data: character, isLoading } = useQuery({
     queryKey: ["character"],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/character/${id}`);
+      const res = await axiosInstance.get(`/character/${params?.id}`);
       return res.data;
     },
   });
-  console.log(data);
+  const episodeQuery = useQuery({
+    enabled: !!character,
+    queryKey: ["episodes", character?.episode],
+    queryFn: async () => {
+      const episodeIds = character.episode.map((ep: string) =>
+        ep.split("/").pop()
+      );
+
+      const res = await axiosInstance.get(`/episode/${episodeIds.join(",")}`);
+
+      return Array.isArray(res.data) ? res.data : [res.data];
+    },
+  });
+
+  const episodes = episodeQuery.data;
+
   return (
     <div className="mx-auto">
-      <DetailCard
-        gender={data?.gender}
-        id={data?.id}
-        image={data?.image}
-        location={data?.location?.name}
-        name={data?.name}
-        status={data?.status}
-        origin={data?.origin?.name}
-        species={data?.species}
-      />
+      {isLoading ? (
+        <SkeletonDetail />
+      ) : (
+        <DetailCard
+          gender={character?.gender}
+          id={character?.id}
+          image={character?.image}
+          location={character?.location?.name}
+          name={character?.name}
+          status={character?.status}
+          origin={character?.origin?.name}
+          species={character?.species}
+          episodes={episodes}
+        />
+      )}
     </div>
   );
 };

@@ -63,27 +63,31 @@ const CharacterContainer = () => {
           />
         </div>
       </div>
-      {isLoading && <SkeletonCard />}
-
-      <div className="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-4">
-        {data?.map((dat: any) => (
-          <CharacterCard
-            key={dat.id}
-            id={dat.id}
-            name={dat.name}
-            image={dat.image}
-            location={dat.location.name}
-            status={dat.status}
-          />
-        ))}
-      </div>
-      <div>
-        <PaginationbButton
-          page={page}
-          setPage={setPage}
-          totalPages={totalPages}
-        />
-      </div>
+      {isLoading ? (
+        <SkeletonCard />
+      ) : (
+        <>
+          <div className="grid grid-cols-1 gap-4 mx-auto md:grid-cols-3 lg:grid-cols-4">
+            {data?.map((dat: any) => (
+              <CharacterCard
+                key={dat.id}
+                id={dat.id}
+                name={dat.name}
+                image={dat.image}
+                location={dat.location.name}
+                status={dat.status}
+              />
+            ))}
+          </div>
+          <div>
+            <PaginationbButton
+              page={page}
+              setPage={setPage}
+              totalPages={totalPages}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };
